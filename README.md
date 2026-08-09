@@ -1,4 +1,4 @@
-# -# Hi, I'm Osama Alsmadi 👋
+# # Hi, I'm Osama Alsmadi 👋
 
 Cybersecurity Analyst focused on Security Engineering, IAM, Endpoint Security, and Secure Application Development.
 
