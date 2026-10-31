@@ -1,4 +1,4 @@
-# # Hi, I'm Osama Alsmadi 👋
+# Hi, I'm Osama Alsmadi 👋
 
 Cybersecurity Analyst focused on Security Engineering, IAM, Endpoint Security, and Secure Application Development.
 
@@ -11,9 +11,12 @@ Cybersecurity Analyst focused on Security Engineering, IAM, Endpoint Security, a
 
 ## 🚀 Featured Projects
 
-- **AegisAccess** – Identity Governance and Administration Platform
-- **AegisNode AI** – Windows Endpoint Security Platform
-- **Honeypot Monitoring System** – Attack Detection and Analysis System
+| Project | Focus |
+| --- | --- |
+| [AegisAccess](https://github.com/osamaalsmadi/AegisAccess) | Identity governance and access reviews |
+| [Aegis-Node-AI](https://github.com/osamaalsmadi/Aegis-Node-AI) | Windows endpoint security |
+| [Honey-Bot](https://github.com/osamaalsmadi/Honey-Bot) | Honeypot monitoring |
+| [Personal Portfolio](https://github.com/osamaalsmadi/Personal-Portfolio) | HTML, CSS, and JavaScript portfolio |
 
 ## 💻 Technical Skills
 
