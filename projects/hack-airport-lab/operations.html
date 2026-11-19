@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="result-site" content="https://hack-airport-lab.chippersequoia4.chatgpt.site">
+  <meta name="result-site" content="https://osamaalsmadi.github.io/osamaalsmadi/">
   <meta name="theme-color" content="#101315">
   <title>Flight operations | Hack Airport</title>
   <link rel="stylesheet" href="assets/airport.css">
@@ -104,7 +104,12 @@
       <div class="compare-columns"><div><h3>Before fix <span id="before-status" class="response-status"></span></h3><pre class="response-text" id="before-response"></pre></div>
       <div><h3>After fix <span id="after-status" class="response-status"></span></h3><pre class="response-text" id="after-response"></pre></div></div>
     </section>
-    <section class="lab-panel lab-notes"><h2>Why it matters</h2><p>A passenger could alter the fare charged on a flight.</p><p><a href="https://cwe.mitre.org/data/definitions/862.html">MITRE CWE-862</a> · <a href="https://top10.owasp.org/2025/A01_2025-Broken_Access_Control/">OWASP A01:2025</a></p></section>
+    <section class="lab-panel lab-notes"><h2>Broken Access Control: what is happening?</h2>
+      <p><strong>In plain language:</strong> signing in proves who a user is; it does not grant permission to use every feature. The fare editor is an operator action. In the vulnerable demo, a customer session can submit a fare change because the handler does not verify the user's role.</p>
+      <p><strong>Impact in this demo:</strong> a customer can change a fictional route's displayed fare, affecting the integrity of the booking data. No real airline price or payment is changed.</p>
+      <p><strong>How to fix it:</strong> enforce authorization in the server-side handler for every request. Require an operator role for fare changes, deny by default, and never rely on hiding an admin page or button in the browser.</p>
+      <p class="source-links"><strong>Sources:</strong> <a href="https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html" target="_blank" rel="noopener">OWASP Authorization Cheat Sheet</a> · <a href="https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/" target="_blank" rel="noopener">OWASP Top 10: Broken Access Control</a> · <a href="https://cwe.mitre.org/data/definitions/862.html" target="_blank" rel="noopener">CWE-862</a></p>
+    </section>
   </main>
   <footer class="site-footer"><div class="container"><span>HACK AIRPORT</span><p>Interactive security sandbox · Demo data</p></div></footer>
   <noscript><p class="no-js">Enable JavaScript to run this lab.</p></noscript>

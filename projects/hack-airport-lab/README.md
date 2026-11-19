@@ -2,7 +2,7 @@
 
 A self-contained airport and passenger-booking simulator with six international departures, real reference photography and six navigable 3D cabins. It includes three manual security labs with replayable fixes.
 
-Live demo: https://hack-airport-lab.chippersequoia4.chatgpt.site
+**GitHub Pages live site:** https://osamaalsmadi.github.io/osamaalsmadi/
 
 > **Course project:** This is an educational, browser-only security simulation. Flight availability, passenger records, prices, coupons and payments are fictional demo data. No airline, payment processor or passenger account is connected.
 
@@ -67,6 +67,8 @@ Open a flight and scroll to **Security labs**. Open a lab and press one of its p
 
 The labs are deterministic client-side teaching examples. They do not send attack traffic to an airline or external service, and the displayed requests are simulated by local JavaScript handlers. The security lessons are authorization by object ownership, role enforcement on sensitive actions, and server-side idempotency or one-time redemption for coupons.
 
+Each lab page contains its own plain-language explanation, demo impact, remediation notes and direct source links. The sources are also collected below for instructors and reviewers.
+
 You can also perform the tests manually from the address bar. Add `flight=rj407`, `flight=tk815`, `flight=ek904`, `flight=ek660`, `flight=qr944`, or `flight=rj261` to change the flight shown. The examples below default to RJ 407.
 
 | Exercise | Address | Manual step |
@@ -92,6 +94,17 @@ After a successful attempt, switching to **Fixed** shows a side-by-side comparis
 - Seats, seat availability, prices, bookings, passenger identities, coupons and payment outcomes are simulated and are not valid for real travel or purchase.
 - The cabin visualization is an interactive reconstruction of published seat layouts; it is not an operational aircraft model.
 - Use the labs only as part of this local educational project. Do not apply the examples to real booking systems or accounts.
+
+## References
+
+- OWASP, [Insecure Direct Object Reference Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.html) — object-level ownership checks.
+- OWASP, [Web Security Testing Guide: Testing for Insecure Direct Object References](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/04-Testing_for_Insecure_Direct_Object_References) — safe test approach for IDOR.
+- OWASP, [Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) — server-side authorization, deny-by-default and checks on every request.
+- OWASP, [Business Logic Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Business_Logic_Security_Cheat_Sheet.html) — workflow rules, coupon replay, atomic updates and idempotency.
+- MITRE, [CWE-639](https://cwe.mitre.org/data/definitions/639.html) — authorization bypass through a user-controlled key.
+- MITRE, [CWE-862](https://cwe.mitre.org/data/definitions/862.html) — missing authorization.
+- MITRE, [CWE-799](https://cwe.mitre.org/data/definitions/799.html) — improper control of interaction frequency.
+- GitHub Docs, [Configuring a publishing source for GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) — Pages deployment workflow.
 
 ## License and image attribution
 

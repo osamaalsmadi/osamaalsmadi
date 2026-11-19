@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="result-site" content="https://hack-airport-lab.chippersequoia4.chatgpt.site">
+  <meta name="result-site" content="https://osamaalsmadi.github.io/osamaalsmadi/">
   <meta name="theme-color" content="#101315">
   <title>Boarding pass | Hack Airport</title>
   <link rel="stylesheet" href="assets/airport.css">
@@ -94,7 +94,12 @@
       <div class="compare-columns"><div><h3>Before fix <span id="before-status" class="response-status"></span></h3><pre class="response-text" id="before-response"></pre></div>
       <div><h3>After fix <span id="after-status" class="response-status"></span></h3><pre class="response-text" id="after-response"></pre></div></div>
     </section>
-    <section class="lab-panel lab-notes"><h2>Why it matters</h2><p>Another guest could read a booking reference, title, seat, and payment amount.</p><p><a href="https://cwe.mitre.org/data/definitions/639.html">MITRE CWE-639</a> · <a href="https://top10.owasp.org/2025/A01_2025-Broken_Access_Control/">OWASP A01:2025</a></p></section>
+    <section class="lab-panel lab-notes"><h2>IDOR: what is happening?</h2>
+      <p><strong>In plain language:</strong> a ticket number identifies a booking, but it does not prove that the current passenger owns that booking. In the vulnerable demo, changing the reference from <code>HA-1042</code> to <code>HA-1043</code> returns the other fictional passenger’s pass because the handler looks up the ticket without checking its owner.</p>
+      <p><strong>Impact in this demo:</strong> the response reveals another passenger’s name, flight, seat and payment amount. The data is fictional and stays inside this browser simulation.</p>
+      <p><strong>How to fix it:</strong> derive the passenger identity from the authenticated server-side session and fetch the ticket only when both its ID and owner match. Enforce that check on every read or update; a hard-to-guess ID is only extra protection, not authorization.</p>
+      <p class="source-links"><strong>Sources:</strong> <a href="https://cheatsheetseries.owasp.org/cheatsheets/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener">OWASP IDOR Prevention Cheat Sheet</a> · <a href="https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/04-Testing_for_Insecure_Direct_Object_References" target="_blank" rel="noopener">OWASP WSTG: IDOR testing</a> · <a href="https://cwe.mitre.org/data/definitions/639.html" target="_blank" rel="noopener">CWE-639</a></p>
+    </section>
   </main>
   <footer class="site-footer"><div class="container"><span>HACK AIRPORT</span><p>Interactive security sandbox · Demo data</p></div></footer>
   <noscript><p class="no-js">Enable JavaScript to run this lab.</p></noscript>

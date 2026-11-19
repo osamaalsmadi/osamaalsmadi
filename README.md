@@ -11,7 +11,7 @@ Cybersecurity-focused technologist interested in security engineering, identity 
 
 ## 🚀 Featured Projects
 
-- **Hack Airport Security Lab** — interactive airport booking simulator with aircraft-specific cabin maps and three educational security labs. [Project files and guide](https://github.com/osamaalsmadi/osamaalsmadi/tree/main/projects/hack-airport-lab) · [Live demo](https://hack-airport-lab.chippersequoia4.chatgpt.site)
+- **Hack Airport Security Lab** — interactive airport booking simulator with aircraft-specific cabin maps and three educational security labs. [Project files and guide](https://github.com/osamaalsmadi/osamaalsmadi/tree/main/projects/hack-airport-lab) · [Live GitHub Pages site](https://osamaalsmadi.github.io/osamaalsmadi/)
 - **AegisAccess** — Identity Governance and Administration platform
 - **AegisNode AI** — Windows endpoint security platform
 - **Honeypot Monitoring System** — attack detection and analysis system

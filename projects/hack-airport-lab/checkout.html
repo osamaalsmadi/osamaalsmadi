@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="result-site" content="https://hack-airport-lab.chippersequoia4.chatgpt.site">
+  <meta name="result-site" content="https://osamaalsmadi.github.io/osamaalsmadi/">
   <meta name="theme-color" content="#101315">
   <title>Flight checkout | Hack Airport</title>
   <link rel="stylesheet" href="assets/airport.css">
@@ -107,7 +107,12 @@
       <div class="compare-columns"><div><h3>Before fix <span id="before-status" class="response-status"></span></h3><pre class="response-text" id="before-response"></pre></div>
       <div><h3>After fix <span id="after-status" class="response-status"></span></h3><pre class="response-text" id="after-response"></pre></div></div>
     </section>
-    <section class="lab-panel lab-notes"><h2>Why it matters</h2><p>A shopper could repeatedly reduce the ticket price on the same checkout.</p><p><a href="https://cwe.mitre.org/data/definitions/799.html">MITRE CWE-799</a> · <a href="https://top10.owasp.org/2025/A06_2025-Insecure_Design/">OWASP A06:2025</a></p></section>
+    <section class="lab-panel lab-notes"><h2>Coupon replay: what is happening?</h2>
+      <p><strong>In plain language:</strong> a valid coupon request is submitted more than once. The vulnerable demo recalculates a discount from the already-discounted total, so replaying the same request reduces the fictional fare again. This is a business-logic flaw in how the checkout handles a one-time action.</p>
+      <p><strong>Impact in this demo:</strong> repeated requests can undercharge the simulated booking. No real coupon, fare or payment is affected.</p>
+      <p><strong>How to fix it:</strong> validate and calculate the discount on the trusted server, record each redemption against the account and order, and make redemption atomic so concurrent or repeated submissions cannot claim it twice. Reject duplicate requests without changing the total.</p>
+      <p class="source-links"><strong>Sources:</strong> <a href="https://cheatsheetseries.owasp.org/cheatsheets/Business_Logic_Security_Cheat_Sheet.html" target="_blank" rel="noopener">OWASP Business Logic Security Cheat Sheet</a> · <a href="https://owasp.org/Top10/2025/A06_2025-Insecure_Design/" target="_blank" rel="noopener">OWASP Top 10: Insecure Design</a> · <a href="https://cwe.mitre.org/data/definitions/799.html" target="_blank" rel="noopener">CWE-799</a></p>
+    </section>
   </main>
   <footer class="site-footer"><div class="container"><span>HACK AIRPORT</span><p>Interactive security sandbox · Demo data</p></div></footer>
   <noscript><p class="no-js">Enable JavaScript to run this lab.</p></noscript>
