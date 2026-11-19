@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="result-site" content="https://hack-airport-lab.chippersequoia4.chatgpt.site">
+  <meta name="theme-color" content="#101315">
+  <title>Boarding pass | Hack Airport</title>
+  <link rel="stylesheet" href="assets/airport.css">
+  <script defer src="assets/flights.js"></script>
+  <script defer src="assets/security.js"></script>
+  <script defer src="assets/labs.js"></script>
+</head>
+<body data-lab="idor">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar"><div class="container nav">
+    <a href="index.html" class="brand" aria-label="Hack Airport home"><span class="brand-mark" aria-hidden="true">→</span><span>HACK <b>AIRPORT</b></span></a>
+    <a class="lab-return" data-return href="index.html">Back to departures</a>
+  </div></header>
+  <main id="main" class="container lab-page">
+    <section class="lab-title">
+      <div><h1>Boarding pass IDOR</h1><p>Test access to another passenger’s boarding pass from your current session.</p></div>
+    </section>
+    <section class="lab-panel guided-lab" aria-labelledby="guided-title">
+      <div class="guided-head">
+        <div><h2 id="guided-title">Run an attack</h2><p id="guided-flight"></p></div>
+        <div class="mode-controls">
+          <div class="mode-switch" role="group" aria-label="Vulnerability mode">
+            <button type="button" class="mode-choice" data-mode-select="vulnerable" aria-pressed="true">Vulnerable</button>
+            <button type="button" class="mode-choice" data-mode-select="fixed" aria-pressed="false">Fixed</button>
+          </div>
+          <span id="mode-state" class="mode-badge" role="status">Vulnerable mode</span>
+        </div>
+      </div>
+      <ol class="lab-steps" aria-label="Lab progress">
+        <li aria-current="step"><span>1</span> Choose a payload</li>
+        <li><span>2</span> Observe the effect</li>
+        <li><span>3</span> Switch to Fixed</li>
+        <li><span>4</span> Retry the same request</li>
+      </ol>
+      <div class="guided-controls">
+        <div class="lab-field payload-field">
+          <p id="attack-label" class="payload-label">Try a payload</p>
+          <div id="attack-options" class="attack-options" role="group" aria-labelledby="attack-label"></div>
+          <p class="payload-help">Choose a payload button to run it. Switch to Fixed, then press the same button again.</p>
+        </div>
+        <div class="lab-actions">
+          <button type="button" class="button secondary" id="reset">Reset lab</button>
+        </div>
+      </div>
+      <p id="attack-context" class="attack-context">Press a payload button to run a request and see its effect.</p>
+      <div id="attack-result" class="attack-result" role="status" hidden><strong id="attack-verdict"></strong><span id="attack-message"></span></div>
+      <div id="attack-effects" class="attack-effects" hidden>
+        <div class="effect-card"><p id="effect-before-label">Before the request</p><strong id="effect-before-value"></strong><span id="effect-before-detail"></span></div>
+        <div class="effect-card"><p id="effect-after-label">After the request</p><strong id="effect-after-value"></strong><span id="effect-after-detail"></span></div>
+      </div>
+      <section id="result-share" class="result-share" aria-labelledby="share-title" hidden>
+        <div><h3 id="share-title">Result link</h3><p id="result-link-note"></p></div>
+        <div class="lab-actions"><button type="button" id="copy-result" class="button secondary">Copy result link</button><a id="open-result" class="button secondary" href="index.html" target="_blank" rel="noopener">Open result →</a></div>
+        <input id="result-url" aria-label="Result link" readonly><p id="copy-status" class="feedback" role="status"></p>
+      </section>
+      <details class="technical-workshop" open>
+        <summary>Request and active code</summary>
+        <div class="compare-columns guided-code">
+          <div><h3>Attack request</h3><pre id="attack-code" class="request-text">Choose an attack to see the request.</pre></div>
+          <div><h3 id="active-code-title">Active handler · Vulnerable</h3><pre class="code-view" id="active-code"></pre></div>
+        </div>
+      </details>
+      <noscript><p>Enable JavaScript to run this lab.</p></noscript>
+    </section>
+    <section class="lab-panel lab-portal" aria-labelledby="portal-title">
+      <div class="lab-portal-banner"><div><h2 id="portal-title">Flight</h2><p id="portal-flight"></p></div></div>
+      <p class="lab-session" id="actor"></p>
+      <div id="app-output" class="lab-receipt" aria-live="polite"></div>
+      
+    </section>
+    <details class="lab-panel lab-inspector manual-inspector">
+      <summary>Request and response log</summary>
+      <div class="compare-columns">
+        <div><h3>Latest request</h3><pre id="request-line" class="request-text">No request sent.</pre></div>
+        <div><h3>Latest response <span class="response-status" id="response-status"></span></h3><pre class="response-text" id="response">No request sent.</pre></div>
+      </div>
+      
+      <details class="lab-hint"><summary>Request history</summary><ol id="request-history" class="lab-history"></ol></details>
+    </details>
+    <details class="lab-panel manual-review">
+      <summary>Security review</summary>
+      <p>A booking read trusts a reference supplied in the URL. The vulnerable handler returns the matching ticket before checking who owns it.</p>
+      <p>CWE-639 · OWASP A01:2025</p>
+    </details>
+    <section class="lab-panel lab-comparison" id="comparison" aria-labelledby="comparison-title" hidden>
+      <h2 id="comparison-title">Same request, before and after</h2>
+      <pre class="request-text" id="compare-request"></pre>
+      <div class="compare-columns"><div><h3>Before fix <span id="before-status" class="response-status"></span></h3><pre class="response-text" id="before-response"></pre></div>
+      <div><h3>After fix <span id="after-status" class="response-status"></span></h3><pre class="response-text" id="after-response"></pre></div></div>
+    </section>
+    <section class="lab-panel lab-notes"><h2>Why it matters</h2><p>Another guest could read a booking reference, title, seat, and payment amount.</p><p><a href="https://cwe.mitre.org/data/definitions/639.html">MITRE CWE-639</a> · <a href="https://top10.owasp.org/2025/A01_2025-Broken_Access_Control/">OWASP A01:2025</a></p></section>
+  </main>
+  <footer class="site-footer"><div class="container"><span>HACK AIRPORT</span><p>Interactive security sandbox · Demo data</p></div></footer>
+  <noscript><p class="no-js">Enable JavaScript to run this lab.</p></noscript>
+</body>
+</html>

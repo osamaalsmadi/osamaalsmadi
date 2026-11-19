@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse published international flight examples and select a seat in an interactive aircraft cabin.">
+  <meta name="theme-color" content="#101a2d">
+  <title>Hack Airport · Departures</title>
+  <link rel="stylesheet" href="assets/airport.css">
+  <script defer src="assets/flights.js"></script>
+  <script defer src="assets/booking.js"></script>
+  <script defer src="assets/board.js"></script>
+</head>
+<body class="board-page">
+  <a class="skip" href="#departures">Skip to departures</a>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="Hack Airport home"><span class="brand-mark" aria-hidden="true">→</span><span>HACK <b>AIRPORT</b></span></a>
+      <nav aria-label="Main navigation"><a href="#departures" aria-current="page">Departures</a></nav>
+      <span class="nav-status"><i></i> Flight simulation</span>
+    </div>
+  </header>
+  <main>
+    <section class="terminal-hero" aria-labelledby="page-title">
+      <div id="hero-photo" class="hero-photo"></div>
+      <div class="container terminal-inner">
+        <div class="terminal-copy">
+          <p class="terminal-label">INTERNATIONAL FLIGHTS</p>
+          <h1 id="page-title">Departures.</h1>
+          <p>Explore real routes, step inside the aircraft and choose your seat.</p>
+          <a class="button primary" href="#departures">Browse flights <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-caption" id="hero-caption"></div>
+      </div>
+    </section>
+    <section id="departures" class="container departures" aria-labelledby="board-title">
+      <div class="section-heading">
+        <div><h2 id="board-title">Flight board</h2><p>Published schedules · 14–17 November 2026 · Local airport times</p></div>
+        <span class="board-label"><i></i> SCHEDULE SNAPSHOT</span>
+      </div>
+      <div class="board-controls">
+        <div class="search-field"><label for="flight-search">Route or flight number</label><input id="flight-search" type="search" placeholder="Search Amman, JFK, EK 904…" autocomplete="off"></div>
+        <div><label for="origin-filter">Departing from</label><select id="origin-filter"><option value="">All airports</option></select></div>
+        <button id="clear-filters" type="button" class="button secondary" disabled>Clear</button>
+      </div>
+      <p id="flight-count" class="flight-count" role="status"></p>
+      <div id="flight-list" class="flight-list"></div>
+      <noscript><p class="empty">Enable JavaScript to browse the schedules.</p></noscript>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container"><a href="index.html">HACK AIRPORT</a><span>Timetable snapshot · Illustrative fares and seat status</span></div></footer>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a2d">
+  <title>Flight details · Hack Airport</title>
+  <link rel="stylesheet" href="assets/airport.css">
+  <script defer src="assets/flights.js"></script>
+  <script defer src="assets/booking.js"></script>
+  <script defer src="assets/cabin.js"></script>
+  <script defer src="assets/flight-page.js"></script>
+</head>
+<body class="flight-page">
+  <a class="skip" href="#main">Skip to flight</a>
+  <header class="topbar"><div class="container nav">
+    <a class="brand" href="index.html" aria-label="Hack Airport home"><span class="brand-mark" aria-hidden="true">→</span><span>HACK <b>AIRPORT</b></span></a>
+    <nav aria-label="Main navigation"><a href="index.html#departures">Departures</a><a href="#my-trips">My trips</a></nav>
+    <span class="nav-status"><i></i> Flight simulation</span>
+  </div></header>
+  <main id="main" class="container flight-main">
+    <a href="index.html#departures" class="back-link">← All flights</a>
+    <section class="itinerary" aria-labelledby="route-title">
+      <div class="itinerary-title"><p id="flight-brand"></p><h1 id="route-title"></h1></div>
+      <dl id="schedule" class="itinerary-data">
+        <div><dt>Departure</dt><dd id="from"></dd><small id="departure-date"></small></div>
+        <div><dt>Arrival</dt><dd id="to"></dd><small id="arrival-date"></small></div>
+        <div><dt>Flight time</dt><dd id="duration"></dd><small>Nonstop</small></div>
+      </dl>
+    </section>
+    <section class="aircraft-showcase compact-aircraft" aria-labelledby="aircraft-title">
+      <img id="aircraft-image" alt="" decoding="async">
+      <div class="compact-aircraft-info"><h2 id="aircraft-title"></h2><p id="aircraft-subtitle"></p>
+        <a id="photo-source" target="_blank" rel="noopener">Exterior photo credit →</a></div>
+      <dl class="aircraft-inventory" aria-label="Aircraft-wide seat availability">
+        <div><dd id="aircraft-open"></dd><dt>Available</dt></div>
+        <div><dd id="aircraft-vip"></dd><dt>VIP available</dt></div>
+        <div><dd id="aircraft-booked"></dd><dt>Booked</dt></div>
+      </dl>
+    </section>
+    <section id="cabin" class="cabin-section" aria-labelledby="cabin-title">
+      <div class="section-heading"><div><h2 id="cabin-title" tabindex="-1">Choose your seat</h2><p id="layout-detail"></p></div><a id="seat-source" class="source-link" target="_blank" rel="noopener">Published seat map →</a></div>
+      <div id="cabin-grid" class="cabin-grid">
+        <div class="cabin-panel">
+          <div class="cabin-toolbar">
+            <div class="control" id="deck-field" hidden><label for="deck-select">Deck</label><select id="deck-select"></select></div>
+            <div class="control" id="zone-field" hidden><label for="zone-select">Rows in 3D walkthrough</label><select id="zone-select"></select></div>
+            <nav id="deck-links" class="deck-links" aria-label="Jump to deck"></nav>
+            <div class="view-switch" role="group" aria-label="Seat map format">
+              <button type="button" data-format="full" aria-pressed="true">Full cabin</button><button type="button" data-format="fit" aria-pressed="false">Fit aircraft</button><button type="button" data-format="3d" aria-pressed="false">3D walkthrough</button><button type="button" data-format="2d" aria-pressed="false">2D map</button>
+            </div>
+          </div>
+          <div class="seat-legend" aria-label="Seat availability legend">
+            <span><i class="available"></i> Available</span><span><i class="vip"></i> VIP available</span><span><i class="booked"></i> Booked</span><span><i class="selected"></i> Selected</span>
+            <strong id="availability" role="status"></strong>
+          </div>
+          <div id="render-full" class="whole-cabin"></div>
+          <div id="render-3d" hidden>
+            <div class="camera-bar" role="group" aria-label="Camera views">
+              <button type="button" data-camera="overview" aria-pressed="true">Cabin overview</button>
+              <button type="button" data-camera="aisle" aria-pressed="false">Aisle view</button>
+              <button type="button" data-camera="seat" aria-pressed="false" disabled>View from seat</button>
+            </div>
+            <div class="cabin-viewport">
+              <canvas id="cabin-canvas" aria-hidden="true"></canvas>
+              <div id="hotspots" role="group" aria-label="Aircraft seats in the current rows"></div>
+              <span id="camera-caption" class="camera-caption">Cabin overview</span>
+            </div>
+            <div class="cabin-paging"><button type="button" id="prev-zone" class="button secondary">← Previous rows</button><span id="zone-summary"></span><button type="button" id="next-zone" class="button secondary">Next rows →</button></div>
+          </div>
+          <div id="render-2d" class="flat-cabin" hidden></div>
+        </div>
+        <aside class="seat-tools" aria-label="Seat selection and cabin classes">
+          <section class="booking-summary">
+            <p id="seat-kicker" class="seat-location">NO SEAT SELECTED</p>
+            <h3>Your trip</h3>
+            <p id="seat-message">Pick an available seat on the cabin map.</p>
+            <dl id="seat-details" class="fare-lines" hidden>
+              <div><dt>Seat</dt><dd id="selected-seat"></dd></div>
+              <div><dt>Travel class</dt><dd id="selected-class"></dd></div>
+              <div><dt>Demo fare</dt><dd id="selected-fare"></dd></div>
+            </dl>
+            <button id="preview-seat" class="button secondary wide" type="button" disabled>View from this seat</button>
+            <button id="continue-booking" class="button primary wide" type="button" disabled>Continue to booking →</button>
+            <p id="booking-feedback" class="feedback" role="status"></p>
+          </section>
+          <section class="cabin-classes" aria-labelledby="class-title">
+            <h3 id="class-title">Cabin classes</h3>
+            <div id="class-list"></div>
+          </section>
+          <figure id="inside-photo" class="inside-photo" hidden>
+            <img id="inside-image" loading="lazy" alt="">
+            <figcaption><span id="inside-caption"></span><a id="inside-source" target="_blank" rel="noopener">Photo credit →</a></figcaption>
+          </figure>
+        </aside>
+      </div>
+    </section>
+    <section id="my-trips" class="trips-section" aria-labelledby="trips-title">
+      <div class="section-heading"><div><h2 id="trips-title">My trips</h2><p>Confirmed bookings saved in this browser.</p></div></div>
+      <div id="trip-list" class="trip-list"></div>
+    </section>
+    <section id="security-labs" class="flight-labs" aria-labelledby="security-title">
+      <div class="section-heading"><div><h2 id="security-title">Security labs</h2><p>Run an attack on this flight’s demo records, apply the fix, then run the same request again.</p></div></div>
+      <div class="flight-lab-grid">
+        <article><h3>Boarding pass IDOR</h3><p>Use another passenger’s reference with your current session.</p><a class="button secondary" data-lab-link href="ticket.html">Open IDOR lab →</a></article>
+        <article><h3>Unauthorized fare access</h3><p>Read or change a fare from a customer session.</p><a class="button secondary" data-lab-link href="operations.html">Open access control lab →</a></article>
+        <article><h3>Coupon replay</h3><p>Repeat a discount request on the same checkout.</p><a class="button secondary" data-lab-link href="checkout.html">Open coupon lab →</a></article>
+      </div>
+    </section>
+    <details class="flight-sources"><summary>About this schedule and cabin</summary><p>This flight entry uses published local times for the shown date. The cabin follows the linked operator configuration, where variants can differ by aircraft assignment. The 3D scene is a reconstruction. Availability, fares and payments are simulated.</p><a id="schedule-source" target="_blank" rel="noopener">Published schedule →</a></details>
+  </main>
+  <dialog id="payment-dialog" class="payment-dialog" aria-labelledby="payment-title">
+    <form id="payment-form">
+      <div class="dialog-head"><div><h2 id="payment-title">Confirm your trip</h2><p id="payment-seat"></p></div><button id="cancel-booking" type="button" class="button secondary" aria-label="Close booking">×</button></div>
+      <div class="payment-fields">
+        <label>Passenger name<input id="passenger" autocomplete="off" required maxlength="70" placeholder="Name for the demo boarding pass"></label>
+        <label>Extras<select id="extras"><option value="">No extras</option><option value="meal">In-flight meal · JOD 12</option><option value="bag">Checked bag · JOD 35</option><option value="both">Meal + bag · JOD 47</option></select></label>
+        <label>Payment method<select id="payment-method"><option value="card">Demo card</option><option value="wallet">Demo mobile wallet</option></select></label>
+        <label>Simulation outcome<select id="payment-outcome"><option value="approve">Approve payment</option><option value="decline">Decline payment</option></select></label>
+      </div>
+      <div class="promo"><label for="promo-code">Promotion code</label><div><input id="promo-code" maxlength="24" autocomplete="off" placeholder="FIRST25"><button id="apply-promotion" type="button" class="button secondary">Apply</button></div><p id="promo-feedback" class="feedback" role="status"></p></div>
+      <div class="checkout-total"><span>Total demo fare</span><strong id="payment-total"></strong></div>
+      <button class="button primary wide" type="submit">Confirm demo payment →</button>
+      <p id="payment-feedback" class="feedback" role="status"></p>
+    </form>
+  </dialog>
+  <footer class="site-footer"><div class="container"><a href="index.html">HACK AIRPORT</a><span>Flight and security simulation</span></div></footer>
+</body>
+</html>
